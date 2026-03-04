@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Stars, Float, SoftShadows, ContactShadows } from "@react-three/drei";
 import { useScroll } from "framer-motion";
@@ -85,14 +85,14 @@ const TechParticles = ({ theme, scrollYProgress }) => {
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
   const particleCount = isMobile ? 100 : 300;
 
-  const particles = Array.from({ length: particleCount }).map(() => ({
+  const [particles] = useState(() => Array.from({ length: particleCount }).map(() => ({
     pos: new THREE.Vector3(
       (Math.random() - 0.5) * 50,
       (Math.random() - 0.5) * 50,
       (Math.random() - 0.5) * 50
     ),
     speed: Math.random() * 0.02
-  }));
+  })));
 
   useFrame(() => {
     if (pointsRef.current) {

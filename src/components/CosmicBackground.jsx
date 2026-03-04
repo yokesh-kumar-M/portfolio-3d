@@ -151,6 +151,7 @@ const DistantGlow = ({ scrollYProgress }) => {
   }), [theme]);
 
   useFrame((state) => {
+    // eslint-disable-next-line react-hooks/immutability
     uniforms.time.value = state.clock.getElapsedTime();
     uniforms.scroll.value = scrollYProgress.get();
   });
