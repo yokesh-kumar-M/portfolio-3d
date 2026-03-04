@@ -173,7 +173,7 @@ body {
 
 .heading-hero {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(3.2rem, 9vw, 7.5rem);
+  font-size: clamp(3rem, 7vw, 5.5rem);
   font-weight: 700;
   line-height: 1.02;
   letter-spacing: -0.03em;
@@ -181,7 +181,7 @@ body {
 
 .heading-section {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  font-size: clamp(2rem, 4vw, 3rem);
   font-weight: 700;
   line-height: 1.1;
   letter-spacing: -0.02em;
@@ -189,7 +189,7 @@ body {
 
 .heading-sub {
   font-family: 'Inter', sans-serif;
-  font-size: clamp(1.15rem, 2vw, 1.5rem);
+  font-size: clamp(1.1rem, 1.5vw, 1.35rem);
   font-weight: 600;
   line-height: 1.35;
 }
@@ -426,7 +426,7 @@ html.dark .invert-dark {
   }
 
   .heading-hero {
-    font-size: clamp(2.4rem, 10vw, 4rem);
+    font-size: clamp(2.4rem, 8vw, 3.5rem);
     letter-spacing: -0.02em;
   }
 

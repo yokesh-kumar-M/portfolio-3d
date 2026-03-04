@@ -53,7 +53,7 @@ export const personalInfo = {
   linkedin: "https://linkedin.com/in/yokeshkumarm",
   github: "https://github.com/yokesh-kumar-M",
   resumeUrl: "/cv.pdf",
-  bio: "Specializing in penetration testing, vulnerability analysis, and building resilient digital defences. I find the flaws before they become threats.",
+  bio: "Specializing in penetration testing, vulnerability analysis, and architecting robust security systems. Focused on proactively identifying and mitigating security risks.",
   roles: [
     "Cybersecurity Engineer",
     "Penetration Tester",
@@ -77,7 +77,7 @@ export const marqueeWords = [
 
 export const about = {
   summary:
-    "B.Tech Computer Science student with a deep passion for cybersecurity. I combine offensive security skills with development knowledge to break and secure systems — making the digital world safer, one vulnerability at a time.",
+    "B.Tech Computer Science student with a deep passion for cybersecurity. I combine offensive security methodologies with software development expertise to identify vulnerabilities and fortify infrastructure — ensuring the digital landscape remains secure.",
   highlights: [
     { label: "CTF Rank", value: "13", suffix: "th", description: "Among 300+ teams globally" },
     { label: "CGPA", value: "8.06", suffix: "", description: "Lovely Professional University" },
@@ -139,7 +139,7 @@ export const services = [
 
 export const skills = [
   {
-    category: "Security Arsenal",
+    category: "Security Toolkit",
     items: [
       { name: "Nmap", icon: TECH_ICONS["Nmap"], level: 90 },
       { name: "Burp Suite", icon: TECH_ICONS["Burp Suite"], level: 85 },

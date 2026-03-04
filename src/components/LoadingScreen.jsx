@@ -6,102 +6,165 @@ const LoadingScreen = ({ onComplete }) => {
   const canvasRef = useRef(null);
 
   useEffect(() => {
-    const c = canvasRef.current;
-    if (!c) return;
-    const ctx = c.getContext("2d");
-    c.width = window.innerWidth;
-    c.height = window.innerHeight;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
 
-    const dotCount = window.innerWidth < 768 ? 25 : 50;
-    const dots = Array.from({ length: dotCount }, () => ({
-      x: Math.random() * c.width,
-      y: Math.random() * c.height,
-      vx: (Math.random() - 0.5) * 0.4,
-      vy: (Math.random() - 0.5) * 0.4,
-      r: Math.random() * 1.2 + 0.4,
-    }));
+    let w = canvas.width = window.innerWidth;
+    let h = canvas.height = window.innerHeight;
 
-    let id;
-    const draw = () => {
-      ctx.fillStyle = "rgba(10,10,15,0.12)";
-      ctx.fillRect(0, 0, c.width, c.height);
-      dots.forEach((p) => {
-        p.x += p.vx;
-        p.y += p.vy;
-        if (p.x < 0 || p.x > c.width) p.vx *= -1;
-        if (p.y < 0 || p.y > c.height) p.vy *= -1;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(232,168,56,${0.1 + (progress / 100) * 0.3})`;
-        ctx.fill();
+    const numStars = window.innerWidth < 768 ? 400 : 800;
+    const stars = [];
+    const centerX = w / 2;
+    const centerY = h / 2;
+    let speed = 0.5; // Starts slow, accelerates
+    let hyperDrive = false;
+
+    // Initialize stars with 3D coordinates
+    for (let i = 0; i < numStars; i++) {
+      stars.push({
+        x: Math.random() * w - centerX,
+        y: Math.random() * h - centerY,
+        z: Math.random() * w,
+        pz: Math.random() * w
       });
-      id = requestAnimationFrame(draw);
+    }
+
+    let animationFrameId;
+
+    const draw = () => {
+      // Create trailing effect using semi-transparent fill
+      ctx.fillStyle = "rgba(2, 2, 5, 0.3)";
+      ctx.fillRect(0, 0, w, h);
+
+      // Accelerate as loading progresses
+      if (progress > 80 && !hyperDrive) {
+        hyperDrive = true;
+      }
+
+      const targetSpeed = hyperDrive ? 40 : 2 + (progress * 0.15);
+      speed += (targetSpeed - speed) * 0.05;
+
+      stars.forEach(star => {
+        star.z -= speed;
+
+        if (star.z <= 0) {
+          star.x = Math.random() * w - centerX;
+          star.y = Math.random() * h - centerY;
+          star.z = w;
+          star.pz = w;
+        }
+
+        // Convert 3D to 2D
+        const k = 128.0 / star.z;
+        const px = star.x * k + centerX;
+        const py = star.y * k + centerY;
+
+        const pk = 128.0 / star.pz;
+        const ppx = star.x * pk + centerX;
+        const ppy = star.y * pk + centerY;
+
+        star.pz = star.z;
+
+        // Draw star trail
+        ctx.beginPath();
+        ctx.moveTo(ppx, ppy);
+        ctx.lineTo(px, py);
+
+        // Color based on distance (closer = brighter, slightly varied hues)
+        const brightness = Math.min(1, 1 - (star.z / w));
+        ctx.strokeStyle = `rgba(255, 255, 255, ${brightness})`;
+        ctx.lineWidth = hyperDrive ? (1 - star.z / w) * 4 : (1 - star.z / w) * 2;
+        ctx.stroke();
+      });
+
+      animationFrameId = requestAnimationFrame(draw);
     };
+
     draw();
-    return () => cancelAnimationFrame(id);
+
+    const handleResize = () => {
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+    };
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+      window.removeEventListener('resize', handleResize);
+    };
   }, [progress]);
 
   useEffect(() => {
+    // Simulate realistic loading progress
+    const duration = 2500; // 2.5 seconds total
+    const interval = 30; // ms
+    const increment = 100 / (duration / interval);
+
     const t = setInterval(() => {
       setProgress((p) => {
         if (p >= 100) {
           clearInterval(t);
-          setTimeout(onComplete, 600);
+          // Wait for hyperdrive effect to visually complete
+          setTimeout(onComplete, 800);
           return 100;
         }
-        return p + 2;
+        // Accelerate progress slightly towards the end
+        return p + increment * (p > 70 ? 1.5 : 1);
       });
-    }, 28);
+    }, interval);
+
     return () => clearInterval(t);
   }, [onComplete]);
 
   return (
     <motion.div
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1] }}
-      className="fixed inset-0 z-[9999] flex flex-col items-center justify-center"
-      style={{ background: "#0A0A0F" }}
+      exit={{ opacity: 0, scale: 1.1 }}
+      transition={{ duration: 0.8, ease: "easeInOut" }}
+      className="fixed inset-0 z-[9999] flex flex-col items-center justify-center overflow-hidden"
+      style={{ background: "#020205" }}
     >
-      <canvas ref={canvasRef} className="absolute inset-0 opacity-50" />
+      <canvas ref={canvasRef} className="absolute inset-0" />
+
+      {/* Atmospheric overlays to enhance the space feel */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[rgba(232,168,56,0.02)] to-transparent pointer-events-none" />
+      <div className="absolute inset-0 shadow-[inset_0_0_150px_rgba(0,0,0,0.9)] pointer-events-none" />
 
       <div className="relative z-10 flex flex-col items-center gap-10">
-        <motion.img
-          src="/custom_logo.png"
-          alt="Logo"
-          className="object-contain rounded-xl"
-          style={{ width: "48px", height: "48px", filter: "drop-shadow(0 0 24px rgba(232,168,56,0.25))" }}
-          initial={{ scale: 0, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-        />
-
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.25 }}
+          transition={{ delay: 0.2 }}
           className="text-center"
         >
-          <h1 className="font-serif text-2xl font-bold text-white tracking-tight">
-            Yokesh Kumar M
-          </h1>
-          <p className="text-xs mt-2 font-mono" style={{ color: "#E8A838" }}>
-            Cybersecurity Engineer
+          <motion.div
+            animate={progress >= 80 ? { scale: [1, 1.1, 1], filter: "blur(2px)" } : {}}
+            transition={{ duration: 0.5 }}
+          >
+            <h1 className="font-serif text-3xl md:text-4xl font-bold text-white tracking-tight drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]">
+              System Initialization
+            </h1>
+          </motion.div>
+          <p className="text-xs mt-3 font-mono uppercase tracking-[0.3em]" style={{ color: "#E8A838" }}>
+            Establishing Secure Connection
           </p>
         </motion.div>
 
-        <div className="w-48">
+        <div className="w-64 max-w-[80vw]">
           <div
-            className="h-[2px] w-full rounded-full overflow-hidden"
-            style={{ background: "rgba(255,255,255,0.05)" }}
+            className="h-[1px] w-full bg-[rgba(255,255,255,0.1)] overflow-hidden relative"
           >
             <motion.div
               initial={{ width: 0 }}
               animate={{ width: `${Math.min(progress, 100)}%` }}
-              className="h-full rounded-full"
-              style={{ background: "linear-gradient(90deg, #E8A838, #B8860B)" }}
+              className="h-full absolute left-0 top-0 shadow-[0_0_10px_#E8A838]"
+              style={{ background: "#E8A838" }}
             />
           </div>
-          <div className="flex justify-end mt-2">
+          <div className="flex justify-between mt-3 px-1">
+            <span className="text-[9px] font-mono text-gray-500 uppercase tracking-widest">
+              {progress >= 80 ? "Hyperspace Jump" : "Boot Sequence"}
+            </span>
             <span className="text-[10px] font-mono" style={{ color: "#E8A838" }}>
               {Math.min(100, Math.round(progress))}%
             </span>
