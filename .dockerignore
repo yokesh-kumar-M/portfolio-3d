@@ -1,0 +1,17 @@
+node_modules
+dist
+.git
+.gitignore
+*.md
+*.pdf
+*.txt
+tmpclaude-*
+nul
+.vscode
+.idea
+.DS_Store
+Thumbs.db
+docker-compose*.yml
+Dockerfile
+.dockerignore
+*.log

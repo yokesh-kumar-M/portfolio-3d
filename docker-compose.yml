@@ -1,0 +1,61 @@
+services:
+  # ─── Load Balancer (entry point) ───
+  load-balancer:
+    image: nginx:1.27-alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx-lb.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      app-1:
+        condition: service_healthy
+      app-2:
+        condition: service_healthy
+      app-3:
+        condition: service_healthy
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: "0.25"
+          memory: 64M
+    networks:
+      - portfolio_net
+
+  # ─── App Replicas ───
+  app-1:
+    build: .
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: 128M
+    networks:
+      - portfolio_net
+
+  app-2:
+    build: .
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: 128M
+    networks:
+      - portfolio_net
+
+  app-3:
+    build: .
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: 128M
+    networks:
+      - portfolio_net
+
+networks:
+  portfolio_net:
+    driver: bridge
