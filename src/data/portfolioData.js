@@ -6,37 +6,37 @@ const icon = (name, variant = "original") =>
 /* --- Professional Icon Mapping — Local Verified Assets --- */
 const TECH_ICONS = {
   // Security Arsenal
-  "Nmap": "/icons/nmap.png",
-  "Burp Suite": "/icons/burpsuite.png",
-  "Metasploit": "/icons/metasploit.png",
-  "Wireshark": "/icons/wireshark.png",
-  "Nessus": "/icons/nessus.png",
-  "Splunk": "/icons/splunk.png",
-  "Wazuh": "/icons/wazuh.png",
+  "Nmap": "/symbols/nmap.png",
+  "Burp Suite": "/symbols/burpsuite.png",
+  "Metasploit": "/symbols/metasploit.png",
+  "Wireshark": "/symbols/wireshark.png",
+  "Nessus": "/symbols/nessus.png",
+  "Splunk": "/symbols/splunk.png",
+  "Wazuh": "/symbols/wazuh.png",
 
   // Frameworks & Dev
   "React": icon("react"),
-  "Django": icon("django"),
-  "Tailwind CSS": icon("tailwindcss"),
-  "Tailwind": icon("tailwindcss"),
-  "Python": icon("python"),
-  "JavaScript": icon("javascript"),
+  "Django": "/symbols/django.png",
+  "Tailwind CSS": "/symbols/tailwind_css.png",
+  "Tailwind": "/symbols/tailwind_css.png",
+  "Python": "/symbols/python.png",
+  "JavaScript": "/symbols/javascript.png",
   "C/C++": icon("cplusplus"),
-  "Java": icon("java"),
+  "Java": "/symbols/java.png",
   "Bash": icon("bash"),
-  "AWS": "https://cdn.simpleicons.org/amazonaws",
-  "Docker": icon("docker"),
-  "Linux": icon("linux"),
+  "AWS": "/symbols/aws.png",
+  "Docker": "/symbols/docker.png",
+  "Linux": "/symbols/linux.png",
   "ELK Stack": "https://cdn.simpleicons.org/elastic",
   "Multithreading": "https://cdn.simpleicons.org/blueprint/D4D4D4",
 
   // Standards
-  "OWASP Top 10": "/icons/owasp.png",
-  "OWASP": "/icons/owasp.png",
-  "NIST CSF": "/icons/nist.png",
-  "NIST": "/icons/nist.png",
-  "ISO 27001": SI + "/blueprint/D4D4D4",
-  "MITRE ATT&CK": "/icons/mitre.png",
+  "OWASP Top 10": "/symbols/owasp.png",
+  "OWASP": "/symbols/owasp.png",
+  "NIST CSF": "/symbols/nist.png",
+  "NIST": "/symbols/nist.png",
+  "ISO 27001": "/symbols/iso.png",
+  "MITRE ATT&CK": "/symbols/mitre_attck.png",
   "Risk Assessment": SI + "/blueprint/D4D4D4",
   "GDPR": SI + "/blueprint/D4D4D4",
   "HIPAA": "https://cdn.simpleicons.org/blueprint/D4D4D4",
@@ -109,7 +109,7 @@ export const services = [
       "Simulating real-world attacks to identify vulnerabilities before malicious actors exploit them. Covering web applications, networks, and cloud infrastructure.",
     icon: "🎯",
     tools: ["Nmap", "Burp Suite", "Metasploit"],
-    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&q=80",
+    image: "/symbols/penetration_testing.png",
   },
   {
     title: "Security Research",
@@ -117,7 +117,7 @@ export const services = [
       "Analysing threat landscapes, studying CVEs, and contributing to the security community through research and Capture the Flag competitions.",
     icon: "🔬",
     tools: ["MITRE ATT&CK", "OWASP", "Wireshark"],
-    image: "https://images.unsplash.com/photo-1563986768609-322da13575f2?w=600&q=80",
+    image: "/symbols/security_research.png",
   },
   {
     title: "SIEM & Monitoring",
@@ -125,7 +125,7 @@ export const services = [
       "Building security monitoring pipelines, writing detection rules, and correlating logs to catch threats in real time.",
     icon: "📡",
     tools: ["Splunk", "Wazuh", "ELK Stack"],
-    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&q=80",
+    image: "/symbols/siem.png",
   },
   {
     title: "Compliance & GRC",
@@ -133,7 +133,7 @@ export const services = [
       "Gap analysis, risk assessment, and documentation aligned with ISO 27001, NIST CSF, GDPR, and HIPAA frameworks.",
     icon: "📋",
     tools: ["ISO 27001", "NIST", "GDPR"],
-    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&q=80",
+    image: "/symbols/grc.png",
   },
 ];
 
@@ -238,7 +238,7 @@ export const projects = [
     github: "https://github.com/yokesh-kumar-M/Piicasso",
     live: "https://pii-casso.vercel.app",
     date: "Jul 2025",
-    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&q=80",
+    image: "/symbols/piicasso.png",
   },
   {
     title: "SprayMaster",
@@ -248,7 +248,7 @@ export const projects = [
     tech: ["Python", "Bash", "Multithreading"],
     github: "https://github.com/yokesh-kumar-M/SprayMaster",
     date: "Jan 2025",
-    image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600&q=80",
+    image: "/symbols/spraymaster.png",
   },
 ];
 
@@ -259,7 +259,7 @@ export const certifications = [
     description:
       "The gold-standard credential for ethical hacking and penetration testing. CEH V13 covers AI-driven threat detection, advanced exploitation techniques, cloud security, IoT hacking, and real-world adversary simulation across 20 comprehensive modules with hands-on lab environments.",
     year: "Feb 2026",
-    badge: "/icons/ceh_v13.png",
+    badge: "/symbols/eccouncil_ceh.png",
     featured: true,
     tier: "elite",
     topics: [
@@ -281,7 +281,7 @@ export const certifications = [
     description:
       "Globally recognised foundational cybersecurity credential covering security principles, business continuity, incident response, access controls, network security, and security operations. Validates job-ready skills for entry-level cybersecurity roles.",
     year: "Apr 2025",
-    badge: "/icons/isc2_cc.png",
+    badge: "/symbols/isc2_cc.png",
     featured: true,
     tier: "professional",
     topics: [
