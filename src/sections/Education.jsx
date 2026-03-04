@@ -107,7 +107,7 @@ const Education = () => {
             <motion.div key={i} {...fade(0.15 + i * 0.1)}>
               {/* Giant stat */}
               <div
-                className="text-5xl md:text-6xl font-serif font-bold mb-4 leading-none"
+                className="text-3xl md:text-6xl font-serif font-bold mb-3 md:mb-4 leading-none"
                 style={{ color: "var(--accent)" }}
               >
                 {ach.stat}

@@ -82,8 +82,10 @@ const CelestialBody = ({ theme, scrollYProgress }) => {
 // Cyber particles that float around
 const TechParticles = ({ theme, scrollYProgress }) => {
   const pointsRef = useRef(null);
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  const particleCount = isMobile ? 100 : 300;
 
-  const particles = Array.from({ length: 300 }).map(() => ({
+  const particles = Array.from({ length: particleCount }).map(() => ({
     pos: new THREE.Vector3(
       (Math.random() - 0.5) * 50,
       (Math.random() - 0.5) * 50,
@@ -141,11 +143,12 @@ const SkyBackground = () => {
       <Canvas
         camera={{ position: [0, 0, 15], fov: 45 }}
         gl={{ antialias: true, alpha: true }}
+        dpr={typeof window !== 'undefined' && window.innerWidth < 768 ? 1 : Math.min(window.devicePixelRatio, 2)}
       >
         <SoftShadows size={20} samples={16} focus={0.5} />
 
         {theme === "dark" && (
-          <Stars radius={100} depth={50} count={3000} factor={4} saturation={0.5} fade speed={0.5} />
+          <Stars radius={100} depth={50} count={typeof window !== 'undefined' && window.innerWidth < 768 ? 1500 : 3000} factor={4} saturation={0.5} fade speed={0.5} />
         )}
 
         <CelestialBody theme={theme} scrollYProgress={scrollRef} />

@@ -57,7 +57,7 @@ const About = () => {
         {/* ─── Bio ─── */}
         <motion.p
           {...fade(0.1)}
-          className="text-xl leading-[1.9] mb-16 max-w-3xl"
+          className="text-xl md:text-2xl leading-[1.9] mb-14 md:mb-16 max-w-3xl"
           style={{ color: "var(--text-s)" }}
         >
           {about.summary}
@@ -71,7 +71,7 @@ const About = () => {
           {about.highlights.map((stat, i) => (
             <motion.div key={stat.label} {...fade(0.15 + i * 0.07)}>
               <div
-                className="text-4xl md:text-5xl font-serif font-bold mb-3"
+                className="text-3xl md:text-5xl font-serif font-bold mb-2 md:mb-3"
                 style={{ color: "var(--accent)" }}
               >
                 <Counter value={stat.value} suffix={stat.suffix} />

@@ -36,7 +36,7 @@ const Experience = () => {
             >
               {/* Main row */}
               <div
-                className="grid grid-cols-1 lg:grid-cols-[200px_1fr] gap-8 lg:gap-12 py-14 transition-all duration-500"
+                className="grid grid-cols-1 lg:grid-cols-[200px_1fr] gap-6 lg:gap-12 py-10 md:py-14 transition-all duration-500"
                 style={{
                   borderBottom:
                     i < experience.length - 1
@@ -48,7 +48,7 @@ const Experience = () => {
                 <div className="flex flex-col gap-4">
                   {/* Big number */}
                   <span
-                    className="text-6xl font-serif font-bold leading-none transition-colors duration-500"
+                    className="text-4xl md:text-6xl font-serif font-bold leading-none transition-colors duration-500"
                     style={{ color: "var(--border-h)" }}
                   >
                     0{i + 1}

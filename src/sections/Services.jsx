@@ -28,20 +28,19 @@ const Services = () => {
             <motion.div
               key={svc.title}
               {...fade(i * 0.08)}
-              className="group py-12 flex flex-col md:flex-row items-start gap-10 cursor-default transition-all duration-500 hover:translate-x-3"
+              className="group py-8 md:py-12 flex flex-col md:flex-row items-start gap-6 md:gap-10 cursor-default transition-all duration-500 hover:translate-x-3"
               style={{ borderBottom: "1px solid var(--border)" }}
             >
               {/* Number */}
               <span
-                className="text-5xl font-serif font-bold shrink-0 transition-colors duration-500"
+                className="text-3xl md:text-5xl font-serif font-bold shrink-0 transition-colors duration-500"
                 style={{ color: "var(--border-h)", width: "60px" }}
               >
                 0{i + 1}
               </span>
 
               {/* Image */}
-              <div className="shrink-0 overflow-hidden rounded-xl opacity-60 group-hover:opacity-100 transition-opacity duration-500"
-                style={{ width: "160px", height: "100px" }}
+              <div className="shrink-0 overflow-hidden rounded-xl opacity-60 group-hover:opacity-100 transition-opacity duration-500 w-full md:w-[160px] h-[140px] md:h-[100px]"
               >
                 <img
                   src={svc.image}

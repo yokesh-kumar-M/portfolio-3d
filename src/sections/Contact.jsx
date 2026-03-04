@@ -41,7 +41,7 @@ const Contact = () => {
         </motion.p>
 
         {/* Two columns */}
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-16">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1fr_1fr] lg:gap-16">
           {/* Left — CTA */}
           <motion.div {...fade(0.15)}>
             <div className="flex items-center gap-3 mb-6" style={{ color: "var(--text-m)" }}>
@@ -56,7 +56,7 @@ const Contact = () => {
               I'd love to hear about your project or opportunity. Drop me a message and let's discuss how we can make it happen.
             </p>
 
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-col sm:flex-row flex-wrap gap-3 md:gap-4">
               <a href={`mailto:${personalInfo.email}`} className="btn-main">
                 <Mail size={16} />
                 <span>Send Email</span>

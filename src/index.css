@@ -16,48 +16,48 @@
    ═══════════════════════════════════════════════ */
 
 html.light {
-  --bg: #FAFAF7;
-  --bg-alt: #F3F1EC;
-  --bg-card: #FFFFFF;
-  --text: #1A1A17;
-  --text-s: #5A5A52;
-  --text-m: #9A9A90;
+  --bg: hsla(60, 20%, 98%, 1);
+  --bg-alt: hsla(60, 10%, 94%, 1);
+  --bg-card: hsla(60, 10%, 100%, 0.85);
+  --text: #1a1a17;
+  --text-s: #5a5a52;
+  --text-m: #9a9a90;
   --accent: #B8860B;
   --accent-h: #996F08;
-  --accent-light: rgba(184, 134, 11, 0.07);
-  --border: rgba(0, 0, 0, 0.05);
-  --border-h: rgba(0, 0, 0, 0.10);
+  --accent-light: hsla(43, 83%, 38%, 0.08);
+  --border: hsla(0, 0%, 0%, 0.05);
+  --border-h: hsla(0, 0%, 0%, 0.1);
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04);
   --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.06);
   --shadow-lg: 0 25px 60px rgba(0, 0, 0, 0.08);
   --shadow-glow: 0 0 50px rgba(184, 134, 11, 0.08);
-  --glass: rgba(255, 255, 255, 0.72);
-  --glass-b: 20px;
-  --sun: #E8A838;
-  --sun-glow: rgba(232, 168, 56, 0.20);
+  --glass: hsla(0, 0%, 100%, 0.7);
+  --glass-b: 16px;
+  --sun: #e8a838;
+  --sun-glow: hsla(38, 79%, 56%, 0.2);
   --invert: 0;
 }
 
 html.dark {
-  --bg: #0A0A0F;
-  --bg-alt: #101018;
-  --bg-card: #141420;
-  --text: #EAEAE5;
-  --text-s: #8A8AA0;
-  --text-m: #505060;
+  --bg: hsla(240, 30%, 2%, 1);
+  --bg-alt: hsla(240, 25%, 4%, 1);
+  --bg-card: hsla(240, 20%, 6%, 0.85);
+  --text: hsla(60, 10%, 92%, 1);
+  --text-s: hsla(240, 10%, 65%, 1);
+  --text-m: hsla(240, 10%, 40%, 1);
   --accent: #E8A838;
   --accent-h: #D49530;
-  --accent-light: rgba(232, 168, 56, 0.06);
-  --border: rgba(255, 255, 255, 0.05);
-  --border-h: rgba(255, 255, 255, 0.10);
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 25px 60px rgba(0, 0, 0, 0.5);
-  --shadow-glow: 0 0 50px rgba(232, 168, 56, 0.06);
-  --glass: rgba(10, 10, 15, 0.72);
-  --glass-b: 20px;
-  --sun: #D4D4E0;
-  --sun-glow: rgba(212, 212, 224, 0.12);
+  --accent-light: hsla(38, 79%, 56%, 0.08);
+  --border: hsla(0, 0%, 100%, 0.05);
+  --border-h: hsla(0, 0%, 100%, 0.1);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.7);
+  --shadow-lg: 0 25px 60px rgba(0, 0, 0, 0.8);
+  --shadow-glow: 0 0 50px rgba(232, 168, 56, 0.08);
+  --glass: hsla(240, 30%, 3%, 0.7);
+  --glass-b: 16px;
+  --sun: #d4d4e0;
+  --sun-glow: hsla(240, 15%, 85%, 0.1);
   --invert: 1;
 }
 
@@ -141,7 +141,13 @@ body {
   flex-direction: column;
   justify-content: center;
   position: relative;
-  padding: 7rem 0;
+  padding: 4rem 0;
+}
+
+@media (min-width: 768px) {
+  .section-page {
+    padding: 7rem 0;
+  }
 }
 
 /* Alternating subtle tone */
@@ -205,11 +211,11 @@ body {
 .btn-main {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  padding: 16px 36px;
+  gap: 8px;
+  padding: 13px 26px;
   background: var(--accent);
   color: #fff;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.02em;
   border: none;
@@ -246,11 +252,11 @@ body {
 .btn-outline {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  padding: 16px 36px;
+  gap: 8px;
+  padding: 13px 26px;
   background: transparent;
   color: var(--text);
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.02em;
   border: 1.5px solid var(--border-h);
@@ -387,4 +393,59 @@ body {
 /* Dark mode inversion for dark SVGs */
 html.dark .invert-dark {
   filter: invert(1) brightness(1.5);
+}
+
+/* ═══════════════════════════════════════════════
+   MOBILE OPTIMIZATIONS
+   ═══════════════════════════════════════════════ */
+
+@media (min-width: 768px) {
+  .btn-main {
+    padding: 16px 36px;
+    gap: 10px;
+    font-size: 14px;
+  }
+
+  .btn-outline {
+    padding: 16px 36px;
+    gap: 10px;
+    font-size: 14px;
+  }
+}
+
+/* Prevent horizontal overflow on mobile */
+@media (max-width: 767px) {
+
+  html,
+  body {
+    overflow-x: hidden;
+  }
+
+  .container-wide {
+    padding: 0 1.25rem;
+  }
+
+  .heading-hero {
+    font-size: clamp(2.4rem, 10vw, 4rem);
+    letter-spacing: -0.02em;
+  }
+
+  .heading-section {
+    font-size: clamp(1.8rem, 7vw, 2.6rem);
+  }
+
+  .heading-sub {
+    font-size: clamp(1rem, 4vw, 1.25rem);
+  }
+
+  /* Reduce excessive vertical spacing on mobile */
+  .section-page {
+    min-height: auto;
+  }
+
+  /* Touch-friendly tap targets */
+  .pill {
+    padding: 6px 14px;
+    font-size: 11px;
+  }
 }

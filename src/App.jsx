@@ -4,7 +4,7 @@ import { ThemeProvider } from "./context/ThemeContext";
 import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
 import { Github, Linkedin, Mail, Heart, ArrowUp } from "lucide-react";
 import Navbar from "./components/Navbar";
-import SkyBackground from "./components/SkyBackground";
+import CosmicBackground from "./components/CosmicBackground";
 import LoadingScreen from "./components/LoadingScreen";
 import Marquee from "./components/Marquee";
 import Hero from "./sections/Hero";
@@ -52,11 +52,13 @@ const AppContent = () => {
   const [showTop, setShowTop] = useState(false);
 
   useEffect(() => {
+    const isMobile = window.innerWidth < 768;
     const lenis = new Lenis({
       duration: 1.3,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
       wheelMultiplier: 0.85,
+      touchMultiplier: isMobile ? 1.5 : 1,
     });
     const loop = (time) => {
       lenis.raf(time);
@@ -87,7 +89,7 @@ const AppContent = () => {
           transition={{ duration: 0.8 }}
         >
           <ScrollBar />
-          <SkyBackground />
+          <CosmicBackground />
           <Navbar />
 
           <main className="relative z-10 w-full overflow-hidden">
@@ -121,7 +123,7 @@ const AppContent = () => {
               style={{ borderTop: "1px solid var(--border)" }}
             >
               <div className="container-wide">
-                <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+                <div className="flex flex-col md:flex-row items-center justify-between gap-5 md:gap-8">
                   <div className="flex items-center gap-3">
                     <img
                       src="/custom_logo.png"
@@ -188,7 +190,7 @@ const AppContent = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.8 }}
                 onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-                className="fixed bottom-8 right-8 z-50 w-11 h-11 rounded-full flex items-center justify-center cursor-pointer transition-transform duration-300 hover:scale-110"
+                className="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-50 w-10 h-10 md:w-11 md:h-11 rounded-full flex items-center justify-center cursor-pointer transition-transform duration-300 hover:scale-110"
                 style={{
                   background: "var(--accent)",
                   color: "#fff",

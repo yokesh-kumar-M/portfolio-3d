@@ -12,7 +12,8 @@ const LoadingScreen = ({ onComplete }) => {
     c.width = window.innerWidth;
     c.height = window.innerHeight;
 
-    const dots = Array.from({ length: 50 }, () => ({
+    const dotCount = window.innerWidth < 768 ? 25 : 50;
+    const dots = Array.from({ length: dotCount }, () => ({
       x: Math.random() * c.width,
       y: Math.random() * c.height,
       vx: (Math.random() - 0.5) * 0.4,
