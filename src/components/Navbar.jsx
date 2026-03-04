@@ -38,7 +38,7 @@ const Navbar = () => {
             {/* ── Left: Logo ── */}
             <a href="#hero" className="flex items-center gap-2 group">
               <img
-                src="/yokesh_cyber_logo_master.png"
+                src="/yokesh_logo.jpg"
                 alt="YK"
                 style={{ width: "28px", height: "28px" }}
                 className="rounded-lg object-contain transition-transform duration-300 group-hover:scale-110"

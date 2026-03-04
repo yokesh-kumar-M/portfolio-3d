@@ -126,7 +126,7 @@ const AppContent = () => {
                 <div className="flex flex-col md:flex-row items-center justify-between gap-5 md:gap-8">
                   <div className="flex items-center gap-3">
                     <img
-                      src="/custom_logo.png"
+                      src="/yokesh_logo.jpg"
                       alt="YK"
                       className="rounded-md object-contain"
                       style={{ width: "22px", height: "22px" }}

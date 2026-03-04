@@ -5,6 +5,7 @@ import { useScroll } from "framer-motion";
 import { EffectComposer, Bloom, Noise, Vignette } from "@react-three/postprocessing";
 import { useTheme } from "../context/ThemeContext";
 import * as THREE from "three";
+import { useState } from "react";
 
 // --- Deep Space Shaders ---
 
@@ -73,8 +74,42 @@ const deepSpaceFragmentShader = `
 
 // --- Scene Components ---
 
+// --- Dark Particles for Light Mode ---
+
+const DarkParticles = ({ count = 600 }) => {
+  const pointsRef = useRef();
+
+  const [positions] = useState(() => {
+    const pos = new Float32Array(count * 3);
+    for (let i = 0; i < count; i++) {
+      pos[i * 3] = (Math.random() - 0.5) * 400;
+      pos[i * 3 + 1] = (Math.random() - 0.5) * 400;
+      pos[i * 3 + 2] = (Math.random() - 0.5) * 300 - 150; // Push far back
+    }
+    return pos;
+  });
+
+  useFrame((state) => {
+    if (pointsRef.current) {
+      pointsRef.current.rotation.y = state.clock.getElapsedTime() * 0.02;
+      pointsRef.current.rotation.x = Math.sin(state.clock.getElapsedTime() * 0.01) * 0.1;
+    }
+  });
+
+  return (
+    <points ref={pointsRef}>
+      <bufferGeometry>
+        <bufferAttribute attach="attributes-position" count={count} array={positions} itemSize={3} />
+      </bufferGeometry>
+      {/* Soft dark dots */}
+      <pointsMaterial size={1.2} color="#1a1a1a" transparent opacity={0.5} sizeAttenuation depthWrite={false} />
+    </points>
+  );
+};
+
 const CelestialVoid = ({ scrollYProgress }) => {
   const groupRef = useRef();
+  const { theme } = useTheme();
 
   useFrame((state, delta) => {
     const scroll = scrollYProgress.get();
@@ -88,10 +123,16 @@ const CelestialVoid = ({ scrollYProgress }) => {
 
   return (
     <group ref={groupRef}>
-      {/* Background Star Layers (Pushed far into the distance) */}
-      <Stars radius={350} depth={100} count={10000} factor={4} saturation={0} fade speed={0.1} />
-      {/* Mid-ground faint cluster */}
-      <Stars radius={200} depth={50} count={2000} factor={6} saturation={1} fade speed={0.5} />
+      {theme === "dark" ? (
+        <>
+          {/* Background Star Layers (Pushed far into the distance) */}
+          <Stars radius={350} depth={100} count={10000} factor={4} saturation={0} fade speed={0.1} />
+          {/* Mid-ground faint cluster */}
+          <Stars radius={200} depth={50} count={2000} factor={6} saturation={1} fade speed={0.5} />
+        </>
+      ) : (
+        <DarkParticles count={1500} />
+      )}
 
       <DistantGlow scrollYProgress={scrollYProgress} />
     </group>
